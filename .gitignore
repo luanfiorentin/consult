@@ -1,0 +1,15 @@
+
+# Ignorar arquivos com formatos:
+*.odt
+*.ods
+*.txt
+*.csv
+*.xlsx
+*.xlsb
+*.RData
+*.Rhistory
+*.Rproj
+*.tiff
+*.png
+*.RDataTmp
+*.jpg
