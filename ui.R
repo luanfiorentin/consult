@@ -18,14 +18,14 @@ sidebar <- dashboardSidebar( # Begin: dashboardSidebar
       icon = icon("table")
     ),
 
-    # Menu de dados brutos:
+    # Menu de Deficits:
     menuItem(
       text = "Déficits",
       tabName = "deficits",
       icon = icon("money-bill")
     ),
 
-    # Menu de cubo de vendas:
+    # Menu de Investimentos:
     menuItem(
       text = "Investimentos",
       tabName = "investimentos",
