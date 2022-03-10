@@ -84,7 +84,7 @@ temadashboard <- shinyDashboardThemes(theme = c(
 
 # Nome do Projeto:
 header <- dashboardHeader(
-   title = "NomeDoProjeto"
+   title = "Envex IICA"
 )
 
 
@@ -99,6 +99,14 @@ header <- dashboardHeader(
 source("functions/out.R")
 
 # Função de leitura do banco de dados:
+## Agua
 source("functions/agua.R")
+## Drenagem
+source("functions/drenagem.R")
+## Residuos
+source("functions/residuos.R")
+
+
+
 
 data <- read_db_wr(sheet = "BaseMun_AA")
