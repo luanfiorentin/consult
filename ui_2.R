@@ -39,6 +39,10 @@ body <- dashboardBody( # Begin dashboardBody:
   temadashboard,
   fluidPage(
     tags$hr(),
+    column(
+      width = 4,
+      tags$hr(),
+      align = "left",
     checkboxGroupInput(
       inputId = "banco",
       label = h6("Selecione o Banco de Dados para Visualizar:"),
@@ -48,6 +52,23 @@ body <- dashboardBody( # Begin dashboardBody:
         "Drenagem" = 3
       ),
       selected = 1
+    ),
+    column(
+      width = 4,
+      tags$hr(),
+      align = "left",
+      radioButtons(inputId = "Agrupamento",
+                   label = h6("Qual agrupamento deseja visualizar?"),
+                   choices = list(
+                     "Brasil" = 1,
+                     "Estado" = 2,
+                     "Regiao" = 3,
+                     "Municipio" = 4
+                   ),
+                   selected = 1
+      ),
+    ),
+    tags$hr(),
     ),
     tags$hr(),
     column(
