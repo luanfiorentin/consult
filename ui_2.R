@@ -65,7 +65,7 @@ body <- dashboardBody( # Begin dashboardBody:
                      "Regiao" = 3,
                      "Municipio" = 4
                    ),
-                   selected = 1
+                   selected = 4
       ),
     ),
     tags$hr(),
