@@ -37,62 +37,97 @@ sidebar <- dashboardSidebar( # Begin: dashboardSidebar
 body <- dashboardBody( # Begin dashboardBody:
   # Tema do dashboard definido anteriormente:
   temadashboard,
+  # Realiza uma requisitção de dados no cubo-de-vendas:
+  tabItem( # Início tabItem
+    tabName = "cubo",
+    fluidPage( # Início fluidPage
+
+      actionButton(inputId = "query", label = "Run Query", icon("refresh")),
+      DTOutput(outputId = "querydata") %>%
+        withSpinner(color = "grey", size = 2)
+    ) # Fim fluidPage
+  ),
   fluidPage(
     tags$hr(),
-    checkboxGroupInput(
-      inputId = "banco",
-      label = h6("Selecione o Banco de Dados para Visualizar:"),
-      choices = list(
-        "Água" = 1,
-        "Resíduos" = 2,
-        "Drenagem" = 3
+    column(
+      width = 6,
+      # tags$hr(),
+      align = "left",
+      checkboxGroupInput(
+        inputId = "banco",
+        label = h3("Banco de Dados:"),
+        choices = list(
+          "Água" = 1,
+          "Resíduos" = 2,
+          "Drenagem" = 3
+        ),
+        selected = 1
+      )
+    ),
+    column(
+      width = 6,
+      # tags$hr(),
+      align = "left",
+      radioButtons(
+        inputId = "id_agrupamento",
+        label = h3("Forma de Agrupamento:"),
+        choices = list(
+          "Brasil" = 1,
+          "Estado" = 2,
+          "Região" = 3,
+          "Município" = 4
+        ),
+        selected = 4
       ),
-      selected = 1
     ),
     tags$hr(),
-    column(
-      width = 4,
-      tags$hr(),
-      align = "left",
-      checkboxGroupInput(
-        inputId = "id_municipio",
-        label = h3("Município:"),
-        selected = "todos",
-        choices = list(
-          "Todos" = "todos",
-          "ID" = "S"
-        )
+  ),
+  tags$hr(),
+  column(
+    width = 4,
+    # tags$hr(),
+    align = "left",
+    checkboxGroupInput(
+      inputId = "id_estado",
+      label = h3("Estado:"),
+      selected = "todos",
+      choices = list(
+        "Todos" = "todos",
+        "ID" = "S"
       )
-    ),
-    column(
-      width = 4,
-      tags$hr(),
-      align = "left",
-      checkboxGroupInput(
-        inputId = "id_estado",
-        label = h3("Estado:"),
-        selected = "todos",
-        choices = list(
-          "Todos" = "todos",
-          "ID" = "S"
-        )
-      )
-    ),
-    column(
-      width = 4,
-      tags$hr(),
-      align = "left",
-      sliderInput(inputId = "id_populacao",
-                  label = h3("População:"),
-                  min = 1,
-                  max = 6,
-                  value = c(1, 6)),
-    ),
-    DTOutput(outputId = "banco") %>% withSpinner(color = "grey", size = 2),
+    )
+  ),
+  column(
+    width = 4,
+    # tags$hr(),
+    align = "left",
+    textInput(
+      inputId = "id_municipio",
+      label = h3("Município:"),
+      value = ""
+    )
+  ),
+  column(
+    width = 4,
+    # tags$hr(),
+    align = "left",
+    sliderInput(
+      inputId = "id_populacao",
+      label = h3("População:"),
+      min = 1,
+      max = 6,
+      value = c(1, 6)
+    )
+  ),
+  column(
+    width = 12,
     tags$hr(),
-    downloadButton("downloadData", "Download"),
-    tags$hr()
-  )
+  ),
+  #
+  DTOutput(outputId = "banco") %>% withSpinner(color = "grey", size = 2),
+  tags$hr(),
+  downloadButton("downloadData", "Download"),
+  tags$hr()
 ) # Begin dashboardBody
 
 
