@@ -38,15 +38,6 @@ body <- dashboardBody( # Begin dashboardBody:
   # Tema do dashboard definido anteriormente:
   temadashboard,
   # Realiza uma requisitção de dados no cubo-de-vendas:
-  tabItem( # Início tabItem
-    tabName = "cubo",
-    fluidPage( # Início fluidPage
-
-      actionButton(inputId = "query", label = "Run Query", icon("refresh")),
-      DTOutput(outputId = "querydata") %>%
-        withSpinner(color = "grey", size = 2)
-    ) # Fim fluidPage
-  ),
   fluidPage(
     tags$hr(),
     column(
@@ -57,11 +48,11 @@ body <- dashboardBody( # Begin dashboardBody:
         inputId = "banco",
         label = h3("Banco de Dados:"),
         choices = list(
-          "Água" = 1,
-          "Resíduos" = 2,
-          "Drenagem" = 3
+          "Água" = "agua",
+          "Resíduos" = "residuos",
+          "Drenagem" = "drenagem"
         ),
-        selected = 1
+        selected = "agua"
       )
     ),
     column(
@@ -72,12 +63,12 @@ body <- dashboardBody( # Begin dashboardBody:
         inputId = "id_agrupamento",
         label = h3("Forma de Agrupamento:"),
         choices = list(
-          "Brasil" = 1,
-          "Estado" = 2,
-          "Região" = 3,
-          "Município" = 4
+          "Brasil" = "brasil",
+          "Estado" = "estado",
+          "Região" = "regiao",
+          "Município" = "municipio"
         ),
-        selected = 4
+        selected = "brasil"
       ),
     ),
     tags$hr(),
@@ -87,14 +78,10 @@ body <- dashboardBody( # Begin dashboardBody:
     width = 4,
     # tags$hr(),
     align = "left",
-    checkboxGroupInput(
+    textInput(
       inputId = "id_estado",
       label = h3("Estado:"),
-      selected = "todos",
-      choices = list(
-        "Todos" = "todos",
-        "ID" = "S"
-      )
+      value = ""
     )
   ),
   column(
@@ -124,9 +111,21 @@ body <- dashboardBody( # Begin dashboardBody:
     tags$hr(),
   ),
   #
-  DTOutput(outputId = "banco") %>% withSpinner(color = "grey", size = 2),
+  fluidPage( # Início fluidPage
+    column(
+      align = "center",
+      actionButton(inputId = "query", label = "Gerar Tabela", icon("refresh")),
+      width = 6
+    ),
+    column(
+      align = "center",
+      downloadButton("downloadData", "Download"),
+      width = 6
+    )
+  ), # Fim fluidPage
+  #
   tags$hr(),
-  downloadButton("downloadData", "Download"),
+  DTOutput(outputId = "banco") %>% withSpinner(color = "grey", size = 2),
   tags$hr()
 ) # Begin dashboardBody
 

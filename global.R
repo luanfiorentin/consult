@@ -19,20 +19,20 @@ if (!require("pacman")) install.packages("pacman")
 
 # Pacotes exigidos:
 pacman::p_load(
-   # Pacote para manipulação:
-   "tidyverse",
-   "lubridate",
-   "stringr",
-   "readxl",
-   "shiny",
-   "shinydashboard",
-   "dashboardthemes",
-   "shinycssloaders",
-   "shinyWidgets",
-   "shinyTime",
-   "DT",
-   "readxl",
-   "janitor"
+  # Pacote para manipulação:
+  "tidyverse",
+  "lubridate",
+  "stringr",
+  "readxl",
+  "shiny",
+  "shinydashboard",
+  "dashboardthemes",
+  "shinycssloaders",
+  "shinyWidgets",
+  "shinyTime",
+  "DT",
+  "readxl",
+  "janitor"
 )
 
 
@@ -66,12 +66,12 @@ options(shiny.maxRequestSize = 500 * 1024^2)
 
 # Tema do shinydashboard:
 temadashboard <- shinyDashboardThemes(theme = c(
-   "grey_dark",
-   "blue_gradient",
-   "grey_light",
-   "purple_gradient",
-    "poor_mans_flatly",
-   "flat_red"
+  "grey_dark",
+  "blue_gradient",
+  "grey_light",
+  "purple_gradient",
+  "poor_mans_flatly",
+  "flat_red"
 )[3])
 
 
@@ -84,7 +84,7 @@ temadashboard <- shinyDashboardThemes(theme = c(
 
 # Nome do Projeto:
 header <- dashboardHeader(
-   title = "Envex IICA"
+  title = "NomeDoProjeto"
 )
 
 
@@ -99,14 +99,9 @@ header <- dashboardHeader(
 source("functions/out.R")
 
 # Função de leitura do banco de dados:
-## Agua
-source("functions/agua.R")
-## Drenagem
+source("functions/funcao_agua.R")
 source("functions/drenagem.R")
-## Residuos
-source("functions/residuos.R")
 
-
-
-
-data <- read_db_wr(sheet = "BaseMun_AA")
+agua <- read_db_wr(sheet = "BaseMun_AA")
+drenagem <- read_db_dr(sheet = "ESTADOS")
+residuos <- read_db_rs(sheet = "Estados")
