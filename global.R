@@ -100,7 +100,8 @@ source("functions/out.R")
 
 # Função de leitura do banco de dados:
 source("functions/funcao_agua.R")
-source("functions/drenagem.R")
+source("functions/funcao_drenagem.R")
+source("functions/funcao_residuos.R")
 
 agua <- read_db_wr(sheet = "BaseMun_AA")
 drenagem <- read_db_dr(sheet = "ESTADOS")

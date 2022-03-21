@@ -12,7 +12,7 @@ server <- function(input, output, session) { # Begin: Server
         #
 
         output$banco <- renderDataTable({
-                data %>%
+                agua %>%
                         out()
         })
 
