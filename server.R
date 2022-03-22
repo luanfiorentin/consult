@@ -9,11 +9,20 @@
 
 # Processamento dos dados:
 server <- function(input, output, session) { # Begin: Server
-        #
 
+        # Tabela de saída em função da escolha do usuário:
         output$banco <- renderDataTable({
-                agua %>%
-                        out()
+                # Condicional para selecionar o banco de dados:
+                if (input$banco == "agua") {
+                        tb <- agua
+                } else if (input$banco == "drenagem") {
+                        tb <- drenagem
+                } else if (input$banco == "residuos") {
+                        tb <- residuos
+                }
+
+                # Saída da condicional:
+                tb %>% out()
         })
 
         output$downloadData <- downloadHandler(
@@ -21,7 +30,7 @@ server <- function(input, output, session) { # Begin: Server
                         "BaseDeDados.xlsx"
                 },
                 content = function(file) {
-                        writexl::write_xlsx(data, path = file)
+                        writexl::write_xlsx(tb, path = file)
                 }
         )
 

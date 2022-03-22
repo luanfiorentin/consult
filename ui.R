@@ -44,13 +44,17 @@ body <- dashboardBody( # Begin dashboardBody:
       width = 6,
       # tags$hr(),
       align = "left",
-      checkboxGroupInput(
+      radioButtons(
         inputId = "banco",
         label = h3("Banco de Dados:"),
         choices = list(
           "Água" = "agua",
           "Resíduos" = "residuos",
-          "Drenagem" = "drenagem"
+          "Drenagem" = "drenagem",
+          "Água+Resíduos" = "agua_residuos",
+          "Água+Drenagem" = "agua_drenagem",
+          "Resíduos+Drenagem" = "residuos_drenagem",
+          "Água+Resíduos+Drenagem" = "agua_residuos_drenagem"
         ),
         selected = "agua"
       )
